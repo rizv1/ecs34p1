@@ -69,17 +69,23 @@ TEST(StringUtilsTest, Replace){
 }
 
 TEST(StringUtilsTest, Split){
+    std::string Base = "now__this__is__epic";
+    std::vector<std::string> expected = {"now", "this", "is", "epic"};
+    EXPECT_EQ(StringUtils::Split(Base, "__"), expected);
     
 }
 
 TEST(StringUtilsTest, Join){
-    
+    std::vector<std::string> Base = {"good", "evening", "mother"};
+    EXPECT_EQ(StringUtils::Join("__", Base), "good__evening__mother");
+    EXPECT_EQ(StringUtils::Join("", Base), "good evening mother");
 }
 
 TEST(StringUtilsTest, ExpandTabs){
-    
+    std::string Base = "good\tevening\tmother";
+    EXPECT_EQ(StringUtils::ExpandTabs(Base, 3), "good   evening   mother");
 }
 
 TEST(StringUtilsTest, EditDistance){
-    
+    EXPECT_EQ(StringUtils::EditDistance("kitten", "sitting", 1), 3); //ignorecase
 }
